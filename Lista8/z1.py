@@ -7,15 +7,13 @@ while n < 1 or n > 10: #zakres dla klucza(przesunięcia)
     print("Klucz nie mieści się w zakresie!")
     n = int(input("Podaj klucz szyfrowania w zakresie 1-10: "))
 
-filepath = input("Podaj ścieżkę do pliku do zaszyfrowania: ")
-
 def sprawdz_sciezka(filepath):
     try: #próba otworzyć plik
         f = open(filepath, "r", encoding="utf-8")
-        return 1
+        return False
     except FileNotFoundError: 
         print("Plik nie znaleziono!") 
-        sprawdz_sciezka()
+        return True
 
 
 def stworz_katalog(zaszyfr):
@@ -40,7 +38,13 @@ def szyfr(sciezka):
     zapis_plik=cez.szyfruj(zapis, n) #wywołanie funkcji z modułu
     stworz_katalog(zapis_plik) 
 
+filepath = input("Podaj ścieżkę do pliku do zaszyfrowania: ")
+while sprawdz_sciezka(filepath):
+    filepath = input("Podaj ścieżkę do pliku do zaszyfrowania: ")
 szyfr(filepath)
+
+
+
 
 
 
